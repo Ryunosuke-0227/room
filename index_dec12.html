@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>skywayを使用した複数人チャット</title>
+    <link rel="stylesheet" href="../shared/style.css">
+    <style>
+      #screen{/* 円卓周り */
+        height:500px;
+      }
+      video#js-local-stream{ /* ローカル画像位置・サイズ */
+        position:absolute;
+        top:350px;
+        left:500px;
+        width:200px;
+        height:auto;
+      }
+
+      .round_table /* 円卓 */
+      {
+      /*border: solid blue 10px;*/
+      /* 円卓位置*/
+      top:200px;
+      left:200px;
+      width: 800px;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      }
+      .round_table::before
+      {
+      content: "";
+      display: block;
+      padding-top: 30%;/* 横長 */
+      }
+      .round_table img
+      {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen">
+      <div class="round_table">
+        <img src="./round_table.jpg">
+      </div>
+    </div>
+    <div class="container">
+      <h1 class="heading">部屋</h1>
+      <p class="note">
+        ルームモード:
+        <a href="#">mesh</a> / <a href="#sfu">sfu</a>
+      </p>
+      <div class="room">
+        <div>
+          <video id="js-local-stream"></video>
+          <span id="js-room-mode"></span>:
+          <input type="text" placeholder="Room Name" id="js-room-id">
+          <button id="js-join-trigger">参加</button>
+          <button id="js-leave-trigger">退出</button>
+        </div>
+
+        <div class="remote-streams" id="js-remote-streams"></div>
+
+        <div>
+          <pre class="messages" id="js-messages"></pre>
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">送信</button>
+        </div>
+        <div class="toggle-mute">
+          <button id="js-toggle-camera">カメラを閉じる</button>
+          <span id="camera-status"></span>
+          <br>
+        
+          <button id="js-toggle-microphone">音声を消す</button>
+          <span id="microphone-status"></span>
+          <br>
+        </div>
+      </div>
+      <p class="meta" id="js-meta"></p>
+    </div>
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.4.js"></script>
+    <script src="../shared/key.js"></script>
+    <script src="./script_dec12.js"></script>
+  </body>
+</html>
